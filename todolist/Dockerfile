@@ -1,4 +1,4 @@
-FROM maven:3-jdk-8-slim as build
+FROM maven:3.8-openjdk-8-slim as build
 
 RUN mkdir /usr/src/goof
 WORKDIR /usr/src/goof
@@ -10,7 +10,7 @@ COPY todolist-web-common todolist-web-common
 COPY todolist-web-struts todolist-web-struts
 RUN --mount=target=$HOME/.m2,type=cache mvn install
 
-FROM tomcat:8.5.21
+FROM tomcat:8.5.100-jdk8
 
 RUN mkdir /tmp/extracted_files
 COPY web.xml /usr/local/tomcat/conf/web.xml
